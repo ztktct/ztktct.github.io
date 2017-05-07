@@ -288,7 +288,7 @@
               
                 
                 <a class="post-title-link" href="/2017/05/07/Mobx学习笔记/" itemprop="url">
-                  MobX学习笔记
+                  MobX学习笔记(持续学习中～)
                 </a>
               
             
@@ -355,7 +355,7 @@
 
           
           
-             <span id="/2017/05/07/Mobx学习笔记/" class="leancloud_visitors" data-flag-title="MobX学习笔记">
+             <span id="/2017/05/07/Mobx学习笔记/" class="leancloud_visitors" data-flag-title="MobX学习笔记(持续学习中～)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -379,7 +379,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  334 字
+                  349 字
                 </span>
               
 
@@ -417,13 +417,13 @@
         
           
             <p>最近公司项目用上了Mobx，就抽空来学习下吧～～</p>
-<h1 id="MobX"><a href="#MobX" class="headerlink" title="MobX"></a>MobX</h1><h2 id="MboX使用"><a href="#MboX使用" class="headerlink" title="MboX使用"></a>MboX使用</h2><p>使用 MobX 将一个应用变成响应式的可归纳为以下三个步骤：</p>
+<h2 id="MobX"><a href="#MobX" class="headerlink" title="MobX"></a>MobX</h2><h3 id="MboX使用"><a href="#MboX使用" class="headerlink" title="MboX使用"></a>MboX使用</h3><p>使用 MobX 将一个应用变成响应式的可归纳为以下三个步骤：</p>
 <ol>
 <li>定义状态并使其可观察</li>
 <li>创建视图以响应状态的变化</li>
 <li>更改状态</li>
 </ol>
-<h2 id="MobX常用API"><a href="#MobX常用API" class="headerlink" title="MobX常用API"></a>MobX常用API</h2><ul>
+<h3 id="MobX常用API"><a href="#MobX常用API" class="headerlink" title="MobX常用API"></a>MobX常用API</h3><ul>
 <li>@observable 使得数据可观察（extendObservable(this, {})语法糖）<br>– extendObservable(target, props) 可以为一个对象引入新的可观察变量</li>
 <li>@computed 在相关数据发生变化时自动更新值（getter）,应该仅仅是返回一个值</li>
 <li>@action 建议在任何改变状态或具有副作用的函数上使用,(严格模式下必须使用)</li>
@@ -431,11 +431,15 @@
 <li>autorun 会追踪副作用运行时使用的可观察变量,其返回一个销毁函数以取消副作用</li>
 <li>toJS 将一个（@observable）的对象转化为 javascript 结构</li>
 </ul>
-<h2 id="mobx-react常用API"><a href="#mobx-react常用API" class="headerlink" title="mobx-react常用API"></a>mobx-react常用API</h2><ul>
+<h3 id="mobx-react常用API"><a href="#mobx-react常用API" class="headerlink" title="mobx-react常用API"></a>mobx-react常用API</h3><ul>
 <li>Provider 可以通过React的上下文机制，将 store 传给子组件</li>
 <li>@inject 与 Provider 结合使用的部分。用于将store中的部分状态，通过上下文的形式注入给子组件  </li>
 <li>@observer 把无状态组件变成响应式组件 @inject(“store1”, “store2”) @observer</li>
 <li>componentWillReact 新的自定义生命周期钩子，当一个组件准备重新渲染时将会被触发</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="https://mobx.js.org/index.html" rel="external nofollow noopener noreferrer" target="_blank">官方文档</a></li>
+<li><a href="http://cn.mobx.js.org/" rel="external nofollow noopener noreferrer" target="_blank">官方文档(中文版)</a></li>
 </ul>
 
           

@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://yoursite.com/images/React%20Native环境搭建/2017-06-02%2000-07-28屏幕截图.png">
 <meta property="og:image" content="http://yoursite.com/images/React%20Native环境搭建/2017-06-02%2000-11-16屏幕截图.png">
 <meta property="og:image" content="http://yoursite.com/images/React%20Native环境搭建/2017-06-03%2000-13-12屏幕截图.png">
-<meta property="og:updated_time" content="2017-06-02T16:15:04.000Z">
+<meta property="og:updated_time" content="2017-06-02T16:18:10.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下搭建React Native环境">
 <meta name="twitter:description" content="一直对APP开发很感兴趣，可惜对JAVA和swift不熟悉，迟迟没有去搞一款像样的APP(明明是个没有Mac的穷屌丝，还想搞IOS开发？)。之前有用过Vue写过一款web App,用cordova封装的伪APP,属于小打小闹的那种，完全没有原生的好用啊！前端界有一句名言：任何可以用JavaScript编写的应用程序，最终都会用JavaScript编写。React Native就是一个可以用JS来编">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,051 字
+                  1,048 字
                 </span>
               
 
@@ -462,13 +462,13 @@
 </blockquote>
 <p><img src="/images/React Native环境搭建/2017-06-02 00-07-28屏幕截图.png" alt="Android Studio"><br><img src="/images/React Native环境搭建/2017-06-02 00-11-16屏幕截图.png" alt="Android Studio"></p>
 </li>
-<li><p>当SDK下载好后，我们还需要配置ANDROID_HOME环境变量：<br>确保ANDROID_HOME环境变量正确地指向了你安装的Android SDK的路径。<br>具体的做法是把下面的命令加入到<code>~/.bashrc</code>文件中。如果你使用的是其他的shell，则选择对应的配置文件:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 如果你不是通过Android Studio安装的sdk，则其路径可能不同，请自行确定清楚。</span></div><div class="line"><span class="built_in">export</span> ANDROID_HOME=~/Android/sdk</div></pre></td></tr></table></figure>
+<li><p>当SDK下载好后，我们还需要配置ANDROID_HOME环境变量：<br>确保ANDROID_HOME环境变量正确地指向了你安装的Android SDK的路径。<br>具体的做法是把下面的命令加入到<code>~/.profile</code>文件中。如果你使用的是其他的shell，则选择对应的配置文件:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 如果你不是通过Android Studio安装的sdk，则其路径可能不同，请自行确定清楚。</span></div><div class="line"><span class="built_in">export</span> ANDROID_HOME=<span class="variable">$&#123;HOME&#125;</span>/Android/Sdk</div></pre></td></tr></table></figure>
 <p> 然后使用下列命令使其立即生效（否则重启后才生效）：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> ~/.profile</div></pre></td></tr></table></figure>
 <p> 可以使用<code>echo $ANDROID_HOME</code>检查此变量是否已正确设置。</p>
 </li>
-<li>将Android SDK的Tools目录添加到PATH变量中，以便在终端中运行一些Android工具，在<code>~/.profile</code>文件中添加:<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> ANDROID_HOME=<span class="variable">$&#123;HOME&#125;</span>/Android/Sdk</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;PATH&#125;</span>:<span class="variable">$&#123;ANDROID_HOME&#125;</span>/tools</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;PATH&#125;</span>:<span class="variable">$&#123;ANDROID_HOME&#125;</span>/platform-tools</div></pre></td></tr></table></figure>
+<li>将Android SDK的Tools目录添加到PATH变量中，以便在终端中运行一些Android工具，在<code>~/.profile</code>文件中添加: <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;PATH&#125;</span>:<span class="variable">$&#123;ANDROID_HOME&#125;</span>/tools</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;PATH&#125;</span>:<span class="variable">$&#123;ANDROID_HOME&#125;</span>/platform-tools</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="安装React-Native命令行工具"><a href="#安装React-Native命令行工具" class="headerlink" title="安装React Native命令行工具"></a>安装React Native命令行工具</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g react-native-cli</div></pre></td></tr></table></figure>

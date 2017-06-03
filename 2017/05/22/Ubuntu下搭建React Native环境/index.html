@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://ztktct.tk/images/React%20Native环境搭建/2017-06-02%2000-07-28屏幕截图.png">
 <meta property="og:image" content="http://ztktct.tk/images/React%20Native环境搭建/2017-06-02%2000-11-16屏幕截图.png">
 <meta property="og:image" content="http://ztktct.tk/images/React%20Native环境搭建/2017-06-03%2000-13-12屏幕截图.png">
-<meta property="og:updated_time" content="2017-06-03T04:18:34.693Z">
+<meta property="og:updated_time" content="2017-06-03T18:02:36.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下搭建React Native环境">
 <meta name="twitter:description" content="一直对APP开发很感兴趣，可惜对JAVA和swift不熟悉，迟迟没有去搞一款像样的APP(明明是个没有Mac的穷屌丝，还想搞IOS开发？)。之前有用过Vue写过一款web App,用cordova封装的伪APP,属于小打小闹的那种，完全没有原生的好用啊！前端界有一句名言：任何可以用JavaScript编写的应用程序，最终都会用JavaScript编写。React Native就是一个可以用JS来编">
@@ -479,15 +479,17 @@
 <p>如果一切顺利，你将会在机器上看到一下这张图:D<br><img src="/images/React Native环境搭建/2017-06-03 00-13-12屏幕截图.png" alt="Android Studio"></p>
 <h2 id="优化开发效率"><a href="#优化开发效率" class="headerlink" title="优化开发效率"></a>优化开发效率</h2><h3 id="watchman"><a href="#watchman" class="headerlink" title="watchman"></a>watchman</h3><p>Watchman是由Facebook提供的监视文件系统变更的工具。安装此工具可以提高开发时的性能（packager可以快速捕捉文件的变化从而实现实时刷新）。<br>执行以下命令安装watchman:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/facebook/watchman.git</div><div class="line"><span class="built_in">cd</span> watchman</div><div class="line">git checkout v4.7.0  <span class="comment"># 这是本文发布时的最新稳定版本</span></div><div class="line">./autogen.sh</div><div class="line">./configure</div><div class="line">make</div><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
 <h4 id="安装错误解决"><a href="#安装错误解决" class="headerlink" title="安装错误解决"></a>安装错误解决</h4><ol>
-<li>安装watchman时如果提示如下信息：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">./autogen.sh: 9: ./autogen.sh: aclocal: not found</div><div class="line">./autogen.sh: 10: ./autogen.sh: autoheader: not found</div><div class="line">./autogen.sh: 11: ./autogen.sh: automake: not found</div><div class="line">./autogen.sh: 12: ./autogen.sh: autoconf: not found</div></pre></td></tr></table></figure>
+<li><p>安装watchman时如果提示如下信息：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">./autogen.sh: 9: ./autogen.sh: aclocal: not found</div><div class="line">./autogen.sh: 10: ./autogen.sh: autoheader: not found</div><div class="line">./autogen.sh: 11: ./autogen.sh: automake: not found</div><div class="line">./autogen.sh: 12: ./autogen.sh: autoconf: not found</div></pre></td></tr></table></figure>
+<p> 丢失的aclocal是automake包的一部分，因此要先安装automake：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install automake</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装watchman时如果提示如下信息：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal error: Python.h: 没有那个文件或目录</div></pre></td></tr></table></figure>
+<p> 需要安装<code>python-dev</code>:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install python-dev</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>丢失的aclocal是automake包的一部分，因此要先安装automake：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install automake</div></pre></td></tr></table></figure></p>
-<ol>
-<li>安装watchman时如果提示如下信息：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal error: Python.h: 没有那个文件或目录</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>需要安装<code>python-dev</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install python-dev</div></pre></td></tr></table></figure></p>
 <h3 id="Gradle-Daemon"><a href="#Gradle-Daemon" class="headerlink" title="Gradle Daemon"></a>Gradle Daemon</h3><p>开启Gradle Daemon可以极大地提升java代码的增量编译速度。</p>
 <ol>
 <li>下载<a href="https://gradle.org/releases" rel="external nofollow noopener noreferrer" target="_blank">Gradle</a>,将其解压到 <code>/usr/local/opt</code> 目录下</li>

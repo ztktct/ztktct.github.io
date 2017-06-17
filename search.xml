@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[CSS Secrets读书笔记]]></title>
+    <url>%2F2017%2F06%2F16%2FCSS%20Secrets%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[最近在看CSS Secrets这本书，真心觉得不错，书中的许多建议和技巧都让我对css有了新的认识。便借着博客将其中一些知识点记录下来，当做笔记，可以在日常工作、学习中常看看！CSS编码技巧currentColorcurrentColor算是css中的一个变量，它代表的不是某个具体的颜色，而是始终等于当前元素对应的color的值，currentColor本身是很多css颜色属性的初始值，像是border-color、outline-color、text-shadow等等。inherit以前虽然知道有这个关键字，但是没怎么用过，看到书上所讲的，突然发现一个困扰我许久的问题解决了：写CSS的时候,页面上经常有a标签，但是a标签默认是有颜色的，一般是蓝色，然是我又不想要他原来的颜色，也不想把颜色写死，这时候就可以考虑inherit这个关键词了。1a&#123; color: inherit; &#125;还有伪元素写的小三角之类的颜色也直接设为inherit，这样就能自动继承背景和边框的样式：避免不必要的媒体查询尽量使用百分比%、em、rem、vw、vh、vmin、vmax代替固定长度不要忘记为替换元素(如img、object、video、iframe等)添加max-width:100%加入背景需要完整的铺满一个容器，可以考虑background-size使用column多列文本布局时，指定column-width而不是column-count，这样在较小的屏幕上会自动单列布局合理使用简写]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React Native初尝试]]></title>
+    <url>%2F2017%2F06%2F13%2FReact%20Native%E5%88%9D%E5%B0%9D%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[上一篇Ubuntu下搭建React Native环境搭建好了开发环境后，便迫不及待的想来尝试下React Native了，这篇就来记录下一款APP的开发步骤吧，算是供自己和后来人做参考吧！项目已上传到github开发首个React Native APP先来张效果图吧，这是利用React Native制作的一款小应用，功能不多，算是给个基于React Native开发APP思路和过程吧：一款绅士小应用:D,感谢J站提供图片资源。## 项目搭建假定我们已经搭建好了React Native所需的环境(可以参考:Ubuntu下搭建React Native环境),我们先把项目搭起来：1$ react-native init JDLY再启动Genymotion模拟器，然后启动项目:123# 可能需要先执行这条命令：$ react-native start$ react-native run-android首次启动可能会出现以下错误:其实很简单，打开Android Studo,打开项目下的android文件夹，Android Studo会自动帮你处理一些依赖啥的，基本能解决大部分问题:D，再次启动项目，你会发现，App已经成功安装了，你可以启动它，会得到如下一张图：项目组成项目的具体编写过程写个大概就够了，就不详细讲述了，项目地址：react-native-jdly,欢迎Fork :D!项目结构下图是整个项目的结构，看上去可能很多，但其实大部分都是React Native自动帮我们生成的：android: android源码相关文件ios: ios源码相关文件index.android.js: React Native项目Android平台入口文件app: 我们实际代码所在的文件项目用到的依赖这些都是项目中用到的一些依赖，不过项目可能并没有用到他们的全部功能，仅供参考，实际请查阅官方文档，介绍的更为全面！native-base： 一个Material Design风格的组件库，用法也很简单，这是他的官网，文档介绍的很详细：native-basereact-native-image-zoom-viewer: 一个幻灯片?组件，项目地址:react-native-image-zoom-viewerreact-native-vector-icons： 一个图标库，github地址：react-native link,使用时需要注意以下步骤(针对Android)：安装依赖：npm install react-native-vector-icons –save编辑android/app/build.gradle:1apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"编辑android/settings.gradle,添加以下代码:12include ':react-native-vector-icons'project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')编辑android/app/build.gradle:1234dependencies &#123; ... compile project(':react-native-vector-icons')&#125;编辑MainApplication.java文件，在android/app/src/main/java/...深层目录下123456789import com.oblador.vectoricons.VectorIconsPackage;...@Overrideprotected List&lt;ReactPackage&gt; getPackages() &#123; return Arrays.&lt;ReactPackage&gt;asList( new MainReactPackage(), new VectorIconsPackage() );&#125;执行react-native link链接原生库react-navigation: 一个导航库，Facebook官方推荐的一个库，应该是不错的，这是官方文档:react-navigationmobx + mobx-react: 一个状态管理库，原谅我引用了进来，其实这个小应用可以不用任何状态管理库就能运行起来，但是mobx用起来还是挺舒服的，比Redux写起来方便，不过由于它使用了ES2017的Decorator特性，所以我们需要编辑项目根目录下的.babelrc文件，添加&quot;plugins&quot;: [&quot;transform-decorators-legacy&quot;],以启用Decorator特性，同时还需要安装babel-plugin-transform-decorators-legacy和babel-preset-react-native-stage-0两个依赖。mobx的文档可参考官方文档,或者项目打包签名密钥我们先需要生成一个签名密钥：1$ keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000这条命令会要求你输入密钥库（keystore）和对应密钥的密码，然后设置一些发行相关的信息。最后它会生成一个叫做my-release-key.keystore的密钥库文件。在运行上面这条语句之后，密钥库里应该已经生成了一个单独的密钥，有效期为10000天。–alias参数后面的别名是你将来为应用签名时所需要用到的，所以记得记录这个别名。注意：请记得妥善地保管好你的密钥库文件，不要上传到版本库或者其它的地方。设置gradle变量把my-release-key.keystore文件放到项目中的android/app文件夹下。编辑~/.gradle/gradle.properties（没有这个文件就创建一个），添加如下的代码（注意把其中的****替换为相应密码）1234MYAPP_RELEASE_STORE_FILE=my-release-key.keystoreMYAPP_RELEASE_KEY_ALIAS=my-key-aliasMYAPP_RELEASE_STORE_PASSWORD=*****MYAPP_RELEASE_KEY_PASSWORD=*****添加签名到项目的gradle配置文件编辑项目目录下的android/app/build.gradle:1234567891011121314151617181920...android &#123; ... defaultConfig &#123; ... &#125; signingConfigs &#123; release &#123; storeFile file(MYAPP_RELEASE_STORE_FILE) storePassword MYAPP_RELEASE_STORE_PASSWORD keyAlias MYAPP_RELEASE_KEY_ALIAS keyPassword MYAPP_RELEASE_KEY_PASSWORD &#125; &#125; buildTypes &#123; release &#123; ... signingConfig signingConfigs.release &#125; &#125;&#125;...生成发行APK包1$ cd android &amp;&amp; ./gradlew assembleRelease注：cd android表示进入android目录（如果你已经在android目录中了那就不用输入了）。./gradlew assembleRelease在macOS和Linux系统中表示执行当前目录下的名为gradlew的脚本文件，运行参数为assembleRelease，注意这个./不可省略；而在windows命令行下则需要去掉./。生成的APK文件位于android/app/build/outputs/apk/app-release.apk，它已经可以用来发布了。测试应用的发行版本1$ cd android &amp;&amp; ./gradlew installRelease更改APP图标自带的图标太丑了？我们可以更换图标为自己想要的，打开android\app\src\main\res目录，有以下目录：前四个就是我们要更改的图标的目录了。注：values文件夹下的strings.xml文件可以更改APP名称哦！结束语这样，一个React Native App就开发好了，由于鄙人没有MAC，IOS还没开发过，/(ㄒoㄒ)/~~，一些经验也还不足，难免会出错，尽请指出与批判，与君共勉！参考资料react-native-jdlynative-basereact-native-image-zoom-viewerreact-native linkreact-navigationMobxReact Native中文网]]></content>
+      <categories>
+        <category>javascript</category>
+        <category>react</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+        <tag>javascript</tag>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu下搭建React Native环境]]></title>
+    <url>%2F2017%2F05%2F22%2FUbuntu%E4%B8%8B%E6%90%AD%E5%BB%BAReact%20Native%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[一直对APP开发很感兴趣，可惜对JAVA和swift不熟悉，迟迟没有去搞一款像样的APP(明明是个没有Mac的穷屌丝，还想搞IOS开发？)。之前有用过Vue写过一款web App,用cordova封装的伪APP,属于小打小闹的那种，完全没有原生的好用啊！前端界有一句名言：任何可以用JavaScript编写的应用程序，最终都会用JavaScript编写。React Native就是一个可以用JS来编写出原生APP的框架。万事开头难，先来搭建React Native的开发环境吧！Node 安装windows下我们可以直接从Nodejs官网下载安装包，双击安装；linux下我们虽然也可以下载node源代码来安装，但推荐使用nvm来安装node，切换版本非常方便！注: 用nvm安装完node后，可能每次启动一个终端，都会提示commond not found,我们需要执行以下命令：nvm alias default stableJAVA环境配置React Native目前需要Android Studio2.0或更高版本，而Android Studio又需要JAVA环境，所以先来配置JAVA环境吧(如果已经安装了JAVA, 请跳过这一步，可通过java -version来查看当前java版本)！我们先去JAVA官网下载所需的JDK。在 /usr/local 目录下新建 java 文件夹,并将下载的JDK复制到该文件夹下：12$ sudo mkdir /usr/local/java$ sudo cp jdk-8u131-linux-x64.tar.gz /usr/local/java解压源码1$ sudo tar xvf jdk-8u131-linux-x64.tar.gz设置环境变量1$ sudo gedit /etc/profile1234export JAVA_HOME=/usr/local/java/jdk1.8.0_25 # 配置jdk的主目录,此处根据JDK的路径来配置export JRE_HOME=$&#123;JAVA_HOME&#125;/jreexport CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/libexport PATH=$&#123;JAVA_HOME&#125;/bin:$PATH配置完成后执行命令source /etc/profile, 然后在终端输入java -version查看是否安装完毕：安装 Android Studio下载Android Studio解压下载到的安装包，cd 到bin文件夹下，执行 ./studio.sh命令，我们就能看到如下界面先不急着安装，按照React Native官网上来讲，我们需要在安装的时候做些改动(英文不好的可以去React Native中文网查看)选择Android Virtual Device:然后就是漫长的等待他下载完毕啦：当下载完毕后，我们还需要下载一些SDK：在SDK Platforms窗口中，选择Show Package Details，然后在Android 6.0 (Marshmallow)中勾选Google APIs、Android SDK Platform 23、Intel x86 Atom System Image、Intel x86 Atom_64 System Image以及Google APIs Intel x86 Atom_64 System Image。在SDK Tools窗口中，选择Show Package Details，然后在Android SDK Build Tools中勾选Android SDK Build-Tools 23.0.1（必须是这个版本）。然后还要勾选最底部的Android Support Repository.当SDK下载好后，我们还需要配置ANDROID_HOME环境变量：确保ANDROID_HOME环境变量正确地指向了你安装的Android SDK的路径。具体的做法是把下面的命令加入到~/.profile文件中。如果你使用的是其他的shell，则选择对应的配置文件:12# 如果你不是通过Android Studio安装的sdk，则其路径可能不同，请自行确定清楚。export ANDROID_HOME=$&#123;HOME&#125;/Android/Sdk然后使用下列命令使其立即生效（否则重启后才生效）：1source ~/.profile可以使用echo $ANDROID_HOME检查此变量是否已正确设置。将Android SDK的Tools目录添加到PATH变量中，以便在终端中运行一些Android工具，在~/.profile文件中添加:12export PATH=$&#123;PATH&#125;:$&#123;ANDROID_HOME&#125;/toolsexport PATH=$&#123;PATH&#125;:$&#123;ANDROID_HOME&#125;/platform-tools安装React Native命令行工具1$ npm install -g react-native-cli由于一些大家都懂的原因，在国内下载npm包比较慢，还好我们勤劳的淘宝帮我们备份了npm源：12# 此条命令将npm源设置成国内淘宝提供的镜像，速度更快哦$ npm config set registry https://registry.npm.taobao.org当然如果你使用yarn,可以这么设置:12yarn config set registry https://registry.npm.taobao.org --globalyarn config set disturl https://npm.taobao.org/dist --global安装完后，我们就可以来尝试构建第一个项目了：123react-native init AwesomeProjectcd AwesomeProjectreact-native run-android如果你想修改后能实时看到结果，那么你应该先运行以下命令:1$ react-native start如果一切顺利，你将会在机器上看到一下这张图:D优化开发效率watchmanWatchman是由Facebook提供的监视文件系统变更的工具。安装此工具可以提高开发时的性能（packager可以快速捕捉文件的变化从而实现实时刷新）。执行以下命令安装watchman:1234567git clone https://github.com/facebook/watchman.gitcd watchmangit checkout v4.7.0 # 这是本文发布时的最新稳定版本./autogen.sh./configuremakesudo make install安装错误解决安装watchman时如果提示如下信息：1234./autogen.sh: 9: ./autogen.sh: aclocal: not found./autogen.sh: 10: ./autogen.sh: autoheader: not found./autogen.sh: 11: ./autogen.sh: automake: not found./autogen.sh: 12: ./autogen.sh: autoconf: not found丢失的aclocal是automake包的一部分，因此要先安装automake：1$ sudo apt-get install automake安装watchman时如果提示如下信息：1fatal error: Python.h: 没有那个文件或目录需要安装python-dev:1$ sudo apt-get install python-devGradle Daemon开启Gradle Daemon可以极大地提升java代码的增量编译速度。下载Gradle,将其解压到 /usr/local/opt 目录下在/etc/profile文件中添加如下配置：12export GRADLE_HOME=/usr/local/opt/gradle-3.5 export PATH=$PATH:$GRADLE_HOME/bin执行 source /etc/profile 使之生效执行gradle -v确定安装成功配置gradle deamon1$ touch ~/.gradle/gradle.properties &amp;&amp; echo "org.gradle.daemon=true" &gt;&gt; ~/.gradle/gradle.properties安装Genymotion比起Android Studio自带的原装模拟器，Genymotion是一个性能更好的选择。Genymotion需要提前安装好virtualbox用命令行安装更为方便：123$ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -$ sudo apt-get update$ sudo apt-get install virtualbox之后我们从Genymotion官网下载Genymotion并安装：12$ chmod +x genymotion-2.9.0-linux_x64.bin$ sudo ./genymotion-2.6.0-linux_x64.bin -d ~进入到~/genymotion目录下,执行./genymotion来启动参考资料React Native中文网React Native官网GenymotionLinux下修复“运行aclocal失败：没有该文件或目录”React Native 一:开发环境搭建]]></content>
+      <categories>
+        <category>javascript</category>
+        <category>react</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+        <tag>javascript</tag>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MobX学习笔记(持续学习中～)]]></title>
+    <url>%2F2017%2F05%2F07%2FMobx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[最近公司项目用上了Mobx，就抽空来学习下吧～～MobXMboX使用使用 MobX 将一个应用变成响应式的可归纳为以下三个步骤：定义状态并使其可观察创建视图以响应状态的变化更改状态MobX常用API@observable 使得数据可观察（extendObservable(this, {})语法糖）– extendObservable(target, props) 可以为一个对象引入新的可观察变量@computed 在相关数据发生变化时自动更新值（getter）,应该仅仅是返回一个值@action 建议在任何改变状态或具有副作用的函数上使用,(严格模式下必须使用)runInAction 对于只执行一次的行为 runInAction(name?, fn, scope?)autorun 会追踪副作用运行时使用的可观察变量,其返回一个销毁函数以取消副作用toJS 将一个（@observable）的对象转化为 javascript 结构mobx-react常用APIProvider 可以通过React的上下文机制，将 store 传给子组件@inject 与 Provider 结合使用的部分。用于将store中的部分状态，通过上下文的形式注入给子组件@observer 把无状态组件变成响应式组件 @inject(“store1”, “store2”) @observercomponentWillReact 新的自定义生命周期钩子，当一个组件准备重新渲染时将会被触发参考资料官方文档官方文档(中文版)]]></content>
+      <categories>
+        <category>javascript</category>
+        <category>react</category>
+      </categories>
+      <tags>
+        <tag>MobX</tag>
+        <tag>mobx-react</tag>
+        <tag>react</tag>
+        <tag>javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HEXO搭建个人博客（进阶）]]></title>
+    <url>%2F2017%2F05%2F06%2FHEXO%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6%2F</url>
+    <content type="text"><![CDATA[上篇HEXO搭建博客讲述了如何搭建基于HEXO的博客，这篇就来讲讲博客的进阶功能吧！自定义域名如果你的博客是搭建在github pages上，而又想用自己的域名，这时候你可以绑定自己的域名。申请域名要绑定域名首先你得要有一个域名，你可以在喜欢的域名提供商那里购买一个域名(比如：万网)，便宜的只要几块钱就够了。这里安利一个国外的免费域名的网站Freenom(手动滑稽~~)。添加域名解析一般购买域名后，我们可以在管理后台设置域名解析，我这边使用的是国外的Freenom提供的免费域名(:D),国内的CloudXNS做的接管，所以以CloudXNS后台为例(操作大同小异):我们需要添加三条记录，两条A记录和一条CNAME记录：添加两条A记录，IP分别是：192.30.252.153 和 192.30.252.154，前缀为www:添加一条CNAME记录, 前缀为@, 记录值为你的github账号.github.io.,(注意,最后有一个点)：添加CNAME文件最后在我们的博客项目下的source文件夹下创建一个CNAME文件(文件名注意大写),里面的内容就是我们想要的域名，这里我写的是自己的域名：部署1$ hexo d当重新部署到github pages之后，你会发现可以使用自己的域名来访问博客啦！！阅读统计字数、时长统计(搭配NexT主题)安装 hexo-wordcount 插件1$ npm install hexo-wordcount --save开启配置编辑 themes\next\_config.yml 文件:123456# Post wordcount display settings# Dependencies: https://github.com/willin/hexo-wordcountpost_wordcount: item_text: true wordcount: true # 字数统计 min2read: true # 阅读时长预计显示当我们配置好之后，我们就可以在页面上看到效果了：但是此时并没有显示单位，这让一个具有强迫症的人不能忍啊，要修改其实也很简单，我们找到 themes\next\_macro\post.swig 文件，修改其中两行代码即可:修改后效果：阅读次数统计(搭配NexT主题)前往leancloud注册账号，并创建应用获取应用的 app_id 和 app_key:创建名为Counter的class,注意，名称必须为Counter编辑 themes\next\_config.yml 文件:123456# Show number of visitors to each article.# You can visit https://leancloud.cn get AppID and AppKey.leancloud_visitors: enable: true app_id: #yourapp_id app_key: #yourapp_key效果：为外部链接添加nofollow有时候我们不想让爬虫通过我们博客的外链而离开，要怎么办呢？a标签有个 rel=nofollow 的属性用于禁止爬虫怕取，但是markdown格式该怎么用呢？这儿有一个 hexo-autonofollow 插件可用:1$ npm install hexo-autonofollow --save安装完后我们在项目的_config.yml文件中修改即可：123# Nofollownofollow: enable: true网易云跟帖是时候为我们的博客添加评论功能了！我们先去网易云跟帖中注册获取代码，拿到productKey编辑 themes\next\_config.yml 文件:1gentie_productKey: # 你的productKey禁用部分页面评论NexT主题有提供 comments: false 的选项允许我们禁用某一页面的评论功能，但是当启用网易云跟帖但页面上没有评论框的时候，往往会报js错误：我们可以更为彻底的在某一页面上禁用网易云跟帖,编辑 themes\next\layout\_third-party\comments\index.swig 文件:123456789&#123;% if page.comments %&#125;&#123;% include 'duoshuo.swig' %&#125;&#123;% include 'disqus.swig' %&#125;&#123;% include 'hypercomments.swig' %&#125;&#123;% include 'gentie.swig' %&#125;&#123;% include 'youyan.swig' %&#125;&#123;% include 'livere.swig' %&#125;&#123;% include 'changyan.swig' %&#125;&#123;%endif%&#125;我是用的NexT主题版本为5.1.0,期望官方能够修改这一BUG吧~~压缩代码此时我们打开博客站点时，查看源代码，发现一大片空白，而且NexT主题默认不压缩css和js，我了提高我们博客的加载速度，我们有必要对代码进行压缩，hexo有一款插件正好帮我们做了这件事：hexo-all-minifier安装插件:1$ npm install hexo-all-minifier --save配置_config.yml:12345678910111213141516171819202122232425# 压缩htmlhtml_minifier: enable: true ignore_error: false# 压缩csscss_minifier: enable: true exclude: - '*.min.css'# 压缩jsjs_minifier: enable: true mangle: true output: compress: exclude: - '*.min.js'# 压缩图片image_minifier: enable: true interlaced: false multipass: false optimizationLevel: 2 pngquant: false progressive: false参考资料HEXO搭建博客hexo高阶教程next主题优化hexo高阶教程]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>hexo</tag>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HEXO搭建个人博客]]></title>
+    <url>%2F2017%2F04%2F28%2FHEXO%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[好久以前就想搞自己的博客了，拖了好久(懒啊！)，趁者这次闲着，就来搞一下博客吧！博客采用Hexo搭建,主题拿的是NexT，它提供了三套样式，而且还支持响应式，效果相当不错！(你作为一个前端，好意思拿别人的主题？:D)博客搭建环境配置安装Nodejs，请从Nodejs官网下载Nodejs，推荐使用nvm来管理Nodejs版本！安装Git，开发必备，推荐使用！申请Github，我们以后可以直接拿GitHub Pages来当我们的博客地址，比如我的博客地址https://ztktct.github.io/ztktct！HEXO安装与配置安装HEXO在安装好Nodejs和Git之后，我们就可以来安装HEXO了：1$ sudo npm install hexo -g创建HEXO项目在安装好HEXO后，我们就可以开始搭建自己的项目了：1$ hexo init myBlog之后你会看到在当前目录下多了一个myBlog文件夹,进入该目录，执行hexo server命令，之后你就可以在浏览器中打开 http://localhost:4000 来访问刚刚搭建好的博客了，没错，就是这么简单！配置HEXO主题搭建好博客之后，默认提供了一套简洁的主题，但是总觉得不够优雅，不够美观，怎么办呢？其实，HEXO提供了很多套主题供我们使用，可以选择自己喜欢的主题，我这个博客用的就是其中一个叫做NexT的主题，就以该主题为例来说明吧！首先，我们先从NexT上克隆该项目到我们的博客项目中去：12$ cd myBlog$ git clone https://github.com/iissnan/hexo-theme-next themes/next之后你会发现在myBlog/theme目录下多了一个next文件夹，这就是NexT主题文件夹了。博客项目下有一个_config.yml文件，我们的博客配置基本上都在这里改了。其中有个theme属性将其改为next即可使用该主题，主题配置请参考官方网站NexT开始写作HEXO提供了创建新文章的命令：1$ hexo new [layout] &lt;title&gt;或者我们可以在source/_posts目录下手动添加Markdown文件，以此开始一篇新的文章Front-Matter每个markdown文件应该提供Front-Matter，以---开头，以---结尾，一般常用的有：title: 文章标题date: 2017/04/28 22:30tags: 标签categories: 分类更多参数请直接参考HEXO官网提示现在写的文章可能是整个文章都展示在外面了，但我们只想展示摘要该怎么办呢？其实只要加入一个&lt;!-- more --&gt;这样的占位符在文章正文里面即可:-DGitpages先在博客创建好了，文章也写好了，但是要怎么发布呢？Github为我们提供了免费的，无限流量的GitHub Pages服务，是不是想想都激动呢O(∩_∩)O！xxxx.github.io我们首先先以我们的用户名在Github上创建一个用户名.github.io的项目，然后我们修改_config.yml文件：1234deploy: type: git repository: https://github.com/ztktct/ztktct.github.io.git branch: master这里的ztktct是我在github上的用户名，实际请改成自己的用户名！部署我们已经配置好了所有的相关配置，但是现在还不能部署到GitHub Pages上，我们还需要装一个依赖hexo-deployer-git:1$ npm install hexo-deployer-git --save之后我们执行以下命令即可部署到GitHub Pages上了:123$ hexo clean$ hexo generate$ hexo deploy要是觉得要执行三个命令过于麻烦，我们可以修改package.json文件，添加以下代码：123"scripts": &#123; "deploy": "hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy"&#125;之后只要执行npm run deploy即可部署啦！！结束语一个基于HEXO的博客基本上就搭建好了，浏览器打开 http://你的用户名.github.io 就可以访问你的博客了，共勉！相关资料HEXONexTGithub PagesHEXO搭建个人博客]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>hexo</tag>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+</search>

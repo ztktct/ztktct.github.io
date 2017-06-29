@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[CSS Secrets读书笔记]]></title>
     <url>%2F2017%2F06%2F16%2FCSS%20Secrets%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[最近在看CSS Secrets这本书，真心觉得不错，书中的许多建议和技巧都让我对css有了新的认识。便借着博客将其中一些知识点记录下来，当做笔记，可以在日常工作、学习中常看看！CSS编码技巧currentColorcurrentColor算是css中的一个变量，它代表的不是某个具体的颜色，而是始终等于当前元素对应的color的值，currentColor本身是很多css颜色属性的初始值，像是border-color、outline-color、text-shadow等等。inherit以前虽然知道有这个关键字，但是没怎么用过，看到书上所讲的，突然发现一个困扰我许久的问题解决了：写CSS的时候,页面上经常有a标签，但是a标签默认是有颜色的，一般是蓝色，然是我又不想要他原来的颜色，也不想把颜色写死，这时候就可以考虑inherit这个关键词了。1a&#123; color: inherit; &#125;还有伪元素写的小三角之类的颜色也直接设为inherit，这样就能自动继承背景和边框的样式：避免不必要的媒体查询尽量使用百分比%、em、rem、vw、vh、vmin、vmax代替固定长度不要忘记为替换元素(如img、object、video、iframe等)添加max-width:100%加入背景需要完整的铺满一个容器，可以考虑background-size使用column多列文本布局时，指定column-width而不是column-count，这样在较小的屏幕上会自动单列布局合理使用简写背景与边框半透明边框有时候我们需要用到半透明边框，但常常与我们预期的不一样，如下面的div01,这是由于背景的工作原理导致的，默认背景是漫延到边框部分的，幸好css第三版中增加了一个新特性，background-clip，它是用来规定背景的绘制区域的，常用的有以下取值：123background-clip: border-box; // 默认,背景包含border、padding、content三个部分backgorund-clip: padding-box; // 背景只包括padding、content两个部分background-clip: content-box; // 背景只包含content部分我们要想凸显半透明边框，可以采用backgorund-clip: padding-box;：]]></content>
+    <content type="text"><![CDATA[最近在看CSS Secrets这本书，真心觉得不错，书中的许多建议和技巧都让我对css有了新的认识。便借着博客将其中一些知识点记录下来，当做笔记，可以在日常工作、学习中常看看！CSS编码技巧currentColorcurrentColor算是css中的一个变量，它代表的不是某个具体的颜色，而是始终等于当前元素对应的color的值，currentColor本身是很多css颜色属性的初始值，像是border-color、outline-color、text-shadow等等。inherit以前虽然知道有这个关键字，但是没怎么用过，看到书上所讲的，突然发现一个困扰我许久的问题解决了：写CSS的时候,页面上经常有a标签，但是a标签默认是有颜色的，一般是蓝色，然是我又不想要他原来的颜色，也不想把颜色写死，这时候就可以考虑inherit这个关键词了。1a&#123; color: inherit; &#125;还有伪元素写的小三角之类的颜色也直接设为inherit，这样就能自动继承背景和边框的样式：避免不必要的媒体查询尽量使用百分比%、em、rem、vw、vh、vmin、vmax代替固定长度不要忘记为替换元素(如img、object、video、iframe等)添加max-width:100%加入背景需要完整的铺满一个容器，可以考虑background-size使用column多列文本布局时，指定column-width而不是column-count，这样在较小的屏幕上会自动单列布局合理使用简写背景与边框半透明边框有时候我们需要用到半透明边框，但常常与我们预期的不一样，如下面的div01,这是由于背景的工作原理导致的，默认背景是漫延到边框部分的，幸好css第三版中增加了一个新特性，background-clip，它是用来规定背景的绘制区域的，常用的有以下取值：123background-clip: border-box; // 默认,背景包含border、padding、content三个部分backgorund-clip: padding-box; // 背景只包括padding、content两个部分background-clip: content-box; // 背景只包含content部分我们要想凸显半透明边框，可以采用backgorund-clip: padding-box;：多重边框box-shadow,这个属性可以接收第四个参数，扩张半径，通过指定正直或负值，可以让投影面积加大或减小outline: 这个属性一直被我忽略，原来他也可以用来描边，他接受的参数跟border属性一样，可以设置边框的style(虚线、实线等),而且还有outline-offset属性用来控制距位置]]></content>
       <categories>
         <category>css</category>
       </categories>
@@ -48,10 +48,10 @@
         <category>react</category>
       </categories>
       <tags>
-        <tag>react</tag>
-        <tag>javascript</tag>
         <tag>MobX</tag>
         <tag>mobx-react</tag>
+        <tag>react</tag>
+        <tag>javascript</tag>
       </tags>
   </entry>
   <entry>

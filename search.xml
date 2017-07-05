@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[HTML5新特性学习系列——Notification]]></title>
+    <url>%2F2017%2F07%2F05%2FHTML5%E6%96%B0%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94Notification%2F</url>
+    <content type="text"><![CDATA[在登录网页版微信后，往往有新消息的时候，会从右上角出现提示，很好奇是怎么实现的，现在就来了解一下吧！Notification API该API用于向用户配置和显示桌面通知。构造方法1let notification = new Notification(title, options);参数title: 一定会被显示的通知标题options: 用于配置通知dir: 文字的方向；它的值可以是 auto（自动）, ltr（从左到右）, or rtl（从右到左）lang: 指定通知中所使用的语言。这个字符串必须在 BCP 47 language tag 文档中是有效的。body: 通知中额外显示的字符串。tag: 赋予通知一个ID，以便在必要的时候对通知进行刷新、替换或移除。icon: 一个图片的URL，将被用于显示通知的图标。属性静态属性Notification.permission(只读)一个用于表明当前通知显示授权状态的字符串。可能的值包括：denied (用户拒绝了通知的显示), granted (用户允许了通知的显示), or default (因为不知道用户的选择，所以浏览器的行为与 denied 时相同).实例属性(全部只读)notification.title：在构造方法中指定的 title 参数。notification.dir：通知的文本显示方向。在构造方法的 options 中指定。notification.lang：通知的语言。在构造方法的 options 中指定。notification.body: 通知的文本内容。在构造方法的 options 中指定。notification.tag: 通知的 ID。在构造方法的 options 中指定。notification.icon: 通知的图标图片的 URL 地址。在构造方法的 options 中指定。实例事件Notification 对象继承自 EventTarget 接口，所以可以用addEventListener来监听事件，removeEventListener来解绑事件，当然也可以直接用on+事件名来绑定事件。click: 当用户点击通知时被触发show: 当通知显示的时候被触发error: 每当通知遇到错误时被触发close: 当用户关闭通知时被触发方法静态方法Notification.requestPermission()：用于当前页面想用户申请显示通知的权限。这个方法只能被用户行为调用（比如：onclick 事件），并且不能被其他的方式调用。该方法接受一个回调方法，传入的参数是用户选择的是否允许通知，可能的值包括：denied , granted , or default .实例方法notification.close(): 用于关闭通知。demo参考资料notification - Web API 接口| MDNwhat we can do]]></content>
+      <categories>
+        <category>HTML5</category>
+      </categories>
+      <tags>
+        <tag>HTML5</tag>
+        <tag>javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[CSS Secrets读书笔记]]></title>
     <url>%2F2017%2F06%2F16%2FCSS%20Secrets%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[最近在看CSS Secrets这本书，真心觉得不错，书中的许多建议和技巧都让我对css有了新的认识。便借着博客将其中一些知识点记录下来，当做笔记，可以在日常工作、学习中常看看！CSS编码技巧currentColorcurrentColor算是css中的一个变量，它代表的不是某个具体的颜色，而是始终等于当前元素对应的color的值，currentColor本身是很多css颜色属性的初始值，像是border-color、outline-color、text-shadow等等。inherit以前虽然知道有这个关键字，但是没怎么用过，看到书上所讲的，突然发现一个困扰我许久的问题解决了：写CSS的时候,页面上经常有a标签，但是a标签默认是有颜色的，一般是蓝色，然是我又不想要他原来的颜色，也不想把颜色写死，这时候就可以考虑inherit这个关键词了。1a&#123; color: inherit; &#125;还有伪元素写的小三角之类的颜色也直接设为inherit，这样就能自动继承背景和边框的样式：避免不必要的媒体查询尽量使用百分比%、em、rem、vw、vh、vmin、vmax代替固定长度不要忘记为替换元素(如img、object、video、iframe等)添加max-width:100%加入背景需要完整的铺满一个容器，可以考虑background-size使用column多列文本布局时，指定column-width而不是column-count，这样在较小的屏幕上会自动单列布局合理使用简写背景与边框半透明边框有时候我们需要用到半透明边框，但常常与我们预期的不一样，如下面的div01,这是由于背景的工作原理导致的，默认背景是漫延到边框部分的，幸好css第三版中增加了一个新特性，background-clip，它是用来规定背景的绘制区域的，常用的有以下取值：123background-clip: border-box; // 默认,背景包含border、padding、content三个部分backgorund-clip: padding-box; // 背景只包括padding、content两个部分background-clip: content-box; // 背景只包含content部分我们要想凸显半透明边框，可以采用backgorund-clip: padding-box;：多重边框box-shadow,这个属性可以接收第四个参数，扩张半径，通过指定正直或负值，可以让投影面积加大或减小outline: 这个属性一直被我忽略，原来他也可以用来描边，他接受的参数跟border属性一样，可以设置边框的style(虚线、实线等),而且还有outline-offset属性用来控制距位置]]></content>
@@ -20,8 +32,8 @@
         <category>react</category>
       </categories>
       <tags>
-        <tag>react</tag>
         <tag>javascript</tag>
+        <tag>react</tag>
         <tag>React Native</tag>
       </tags>
   </entry>
@@ -34,13 +46,13 @@
         <category>react</category>
       </categories>
       <tags>
-        <tag>react</tag>
         <tag>javascript</tag>
+        <tag>react</tag>
         <tag>React Native</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[MobX学习笔记(持续学习中～)]]></title>
+    <title><![CDATA[MobX学习笔记]]></title>
     <url>%2F2017%2F05%2F07%2FMobx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[最近公司项目用上了Mobx，就抽空来学习下吧～～MobXMboX使用使用 MobX 将一个应用变成响应式的可归纳为以下三个步骤：定义状态并使其可观察创建视图以响应状态的变化更改状态MobX常用API@observable 使得数据可观察（extendObservable(this, {})语法糖）– extendObservable(target, props) 可以为一个对象引入新的可观察变量@computed 在相关数据发生变化时自动更新值（getter）,应该仅仅是返回一个值@action 建议在任何改变状态或具有副作用的函数上使用,(严格模式下必须使用)runInAction 对于只执行一次的行为 runInAction(name?, fn, scope?)autorun 会追踪副作用运行时使用的可观察变量,其返回一个销毁函数以取消副作用toJS 将一个（@observable）的对象转化为 javascript 结构mobx-react常用APIProvider 可以通过React的上下文机制，将 store 传给子组件@inject 与 Provider 结合使用的部分。用于将store中的部分状态，通过上下文的形式注入给子组件@observer 把无状态组件变成响应式组件 @inject(“store1”, “store2”) @observercomponentWillReact 新的自定义生命周期钩子，当一个组件准备重新渲染时将会被触发参考资料官方文档官方文档(中文版)]]></content>
       <categories>
@@ -48,10 +60,10 @@
         <category>react</category>
       </categories>
       <tags>
+        <tag>javascript</tag>
         <tag>MobX</tag>
         <tag>mobx-react</tag>
         <tag>react</tag>
-        <tag>javascript</tag>
       </tags>
   </entry>
   <entry>
